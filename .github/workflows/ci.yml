@@ -97,8 +97,8 @@ jobs:
         run: |
           cat > .env << EOF
           BASE_URL=${SHAHBAZ_BASE_URL}
-          CUSTOMER_MAIL=${SHAHBAZ_USER_NAME}
-          CUSTOMER_PASSWORD=${SHAHBAZ_USER_PASSWORD}
+          USER_NAME=${SHAHBAZ_USER_NAME}
+          USER_PASSWORD=${SHAHBAZ_USER_PASSWORD}
           EOF
 
       - name: Run API Tests
