@@ -92,12 +92,12 @@ jobs:
       - name: Create .env file
         env:
           SHAHBAZ_BASE_URL: ${{ secrets.SHAHBAZ_BASE_URL }}
-          SHAHBAZ_USER_MAIL: ${{ secrets.SHAHBAZ_USER_NAME }}
+          SHAHBAZ_USER_NAME: ${{ secrets.SHAHBAZ_USER_NAME }}
           SHAHBAZ_USER_PASSWORD: ${{ secrets.SHAHBAZ_USER_PASSWORD }}
         run: |
           cat > .env << EOF
           BASE_URL=${SHAHBAZ_BASE_URL}
-          CUSTOMER_MAIL=${SHAHBAZ_USER_MAIL}
+          CUSTOMER_MAIL=${SHAHBAZ_USER_NAME}
           CUSTOMER_PASSWORD=${SHAHBAZ_USER_PASSWORD}
           EOF
 
