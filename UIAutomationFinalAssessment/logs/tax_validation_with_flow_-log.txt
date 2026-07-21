@@ -1,0 +1,12 @@
+1. [12:09:18] INFO Test Started
+2. [12:09:18] INFO Step: home page 
+3. [12:09:18] INFO Navigating to https://chess-agent-83252463.figma.site/
+4. [12:09:19] INFO Screenshot captured: home-page-loaded
+5. [12:09:19] INFO Step: cloth category 
+6. [12:09:19] INFO step: product page open
+7. [12:09:19] INFO Screenshot captured: product-page-loaded
+8. [12:09:19] INFO step: add to cart
+9. [12:09:20] INFO step: go to cart
+10. [12:09:20] INFO Screenshot captured: product-page-loaded
+11. [12:09:20] INFO step: tax validation in cart part
+12. [12:09:20] INFO Test passed
