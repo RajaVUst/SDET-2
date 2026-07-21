@@ -41,8 +41,5 @@ export class CartPage {
         
         await expect(subtotalNum).toEqual(sum);
         await expect(totalNum).toEqual(sum + taxNum);
-        // await page.getByTestId('cart-subtotal').click();
-        // await page.getByTestId('cart-tax').click();
-        // await page.getByTestId('cart-total').click();
     }
 }
