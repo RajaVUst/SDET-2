@@ -49,56 +49,56 @@ jobs:
             ui-testing/playwright-report
             ui-testing/test-results
 
-    api-tests:
-      name: API Tests
-      runs-on: ubuntu-latest
+  api-tests:
+    name: API Tests
+    runs-on: ubuntu-latest
 
-      defaults:
-        run:
-          working-directory: api-testing
+    defaults:
+      run:
+        working-directory: api-testing
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-        - name: Setup Java
-          uses: actions/setup-java@v4
-          with:
-            distribution: temurin
-            java-version: 22
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 22
 
-        - name: Cache Maven
-          uses: actions/cache@v4
-          with:
-            path: ~/.m2/repository
-            key: ${{ runner.os }}-maven-${{ hashFiles('api-testing/pom.xml') }}
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('api-testing/pom.xml') }}
 
-        - name: Create .env
-          run: |
-            cat <<EOF > .env
-            BASE_URL=${{ secrets.AKHIL_API_BASE_URL }}
-            NAME=${{ secrets.AKHIL_NAME }}
-            PASSWORD=${{ secrets.AKHIL_PASSWORD }}
-            EOF
+      - name: Create .env
+        run: |
+          cat <<EOF > .env
+          BASE_URL=${{ secrets.AKHIL_API_BASE_URL }}
+          NAME=${{ secrets.AKHIL_NAME }}
+          PASSWORD=${{ secrets.AKHIL_PASSWORD }}
+          EOF
 
-        - name: Execute API Tests
-          run: mvn clean test
+      - name: Execute API Tests
+        run: mvn clean test
 
-        - name: Upload Allure Results
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: allure-results
-            path: api-testing/allure-results
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: api-testing/allure-results
 
-        - name: Generate allure report
-          run: mvn allure:report
+      - name: Generate allure report
+        run: mvn allure:report
 
-        - name: Upload Test Reports
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: api-test-reports
-            path: |
-              api-testing/target/surefire-reports
-              api-testing/target/site
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-reports
+          path: |
+            api-testing/target/surefire-reports
+            api-testing/target/site
