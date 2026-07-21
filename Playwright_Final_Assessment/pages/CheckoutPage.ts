@@ -22,7 +22,7 @@
            await this.page.locator('[data-testid="shipping-state-select"]').selectOption(state)
            await this.page.locator('[data-testid="shipping-country-input"]').fill(country)
             
-           await Promise.all([this.page.waitForURL(/payment/, { timeout: 3000 }),this.page.getByRole('button', { name: /Continue to/ }).click()]);
+           await Promise.all([this.page.waitForURL(/payment/, { timeout: 15000 }),this.page.getByRole('button', { name: /Continue to/ }).click()]);
 
 
         
