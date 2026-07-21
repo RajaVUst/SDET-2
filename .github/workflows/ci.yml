@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - capstone/310970-karthikeyan
 
   pull_request:
     branches:
