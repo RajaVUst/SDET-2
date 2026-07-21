@@ -9,6 +9,5 @@ test("Verify tehe Shipping Charges before and after the threshold value",async({
     await test1.searchProduct("Shoe")
     await test1.addProductToCart()
     await test1.FreeShippingThreshold()
-    log.info("Login for the Tripstack",{username:Env.get("USERNAME"),password:Env.get("PASSWORD")})
     
 });
