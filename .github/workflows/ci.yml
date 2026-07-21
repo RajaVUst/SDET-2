@@ -88,13 +88,10 @@ jobs:
           java-version: '22'
           cache: maven
 
-      - name: Create .env
-        working-directory: FinalCapstoneApi
-        run: |
-          echo "BASE_URL=${{ vars.BASE_API_URL }}" > .env
-
       - name: Run Maven Tests
         working-directory: FinalCapstoneApi
+        env:
+          BASE_URL: ${{ vars.BASE_API_URL || 'https://demoqa.com' }}
         run: mvn clean test
 
       - name: Generate Allure Report
