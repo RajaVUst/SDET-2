@@ -88,6 +88,10 @@ jobs:
           java-version: '22'
           cache: maven
 
+      - name: Clear previous Allure results
+        working-directory: FinalCapstoneApi
+        run: rm -rf allure-results
+
       - name: Run Maven Tests
         working-directory: FinalCapstoneApi
         env:
