@@ -1,0 +1,88 @@
+https://github.com/RajaVUst/SDET-2/tree/capstone/307424-shahbaz-ahmad
+
+
+
+name: CI for UI and API Automation
+
+on:
+  push:
+    branches:
+      - capstone/307424-shahbaz-ahmad
+
+  pull_request:
+    branches:
+      - capstone/307424-shahbaz-ahmad
+
+
+jobs:
+
+  ui-tests:
+    name: UI Automation Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: UIAutomationFinalAssessment
+
+    steps:
+
+      
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: UIAutomationFinalAssessment/package-lock.json
+
+
+    
+      - name: Install Dependencies
+        run: npm ci
+
+
+  
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright Tests
+        env:
+          CI: true
+
+          BASEURL: ${{ secrets.Shahbaz_BASEURL }}
+
+       
+          CUSTOMER_EMAIL: ${{ secrets.Shahbaz_CUSTOMER_EMAIL }}
+          CUSTOMER_NAME: ${{ secrets.Shahbaz_CUSTOMER_NAME }}
+          CUSTOMER_PHONE: ${{ secrets.Shahbaz_CUSTOMER_PHONE }}
+
+          
+          CARD_NAME_ON_CARD: ${{ secrets.Shahbaz_CARD_NAME_ON_CARD }}
+          CARD_NUMBER: ${{ secrets.Shahbaz_CARD_NUMBER }}
+          CARD_EXPIRY: ${{ secrets.Shahbaz_CARD_EXPIRY }}
+          CARD_CVV: ${{ secrets.Shahbaz_CARD_CVV }}
+
+        run: npx playwright test
+
+
+      - name: Upload Playwright HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: UIAutomationFinalAssessment/playwright-report/
+          if-no-files-found: warn
+
+
+      - name: Upload Playwright Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: UIAutomationFinalAssessment/test-results/
+          if-no-files-found: warn
