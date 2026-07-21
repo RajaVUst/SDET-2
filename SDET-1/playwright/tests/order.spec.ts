@@ -1,4 +1,5 @@
 import {test, expect} from "../src/fixtures/test.fixture"
+import { TEST_DATA, PRODUCT_IDS } from "../src/config/constants"
 
 test("Remove Product Validation", async ({ order, evidence, page }, testInfo) => {
     await order.addMultipleProductsToCart();
@@ -17,7 +18,7 @@ test("Payment Failure Validation", async ({ order, evidence, page }, testInfo) =
     await order.continueCheckout();
     await order.fillCheckoutDetails();
     
-    await order.fillPaymentDetails("Chaithra Chandran", "4000 0000 0000 0002", "07/29", "899");
+    await order.fillPaymentDetails();
     
     await testInfo.attach("Payment Failure State", {
         body: await page.screenshot(),

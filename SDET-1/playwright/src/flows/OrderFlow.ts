@@ -4,6 +4,7 @@ import { CartPage } from "../pages/CartPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { PaymentPage } from "../pages/PaymentPage";
 import { AppLogger } from "../utils/logger";
+import { TEST_DATA, PRODUCT_IDS } from "../config/constants";
 
 export class OrderFlow {
     private readonly homePage: HomePage;
@@ -21,15 +22,15 @@ export class OrderFlow {
     async addToCart() : Promise<void>{
         await this.homePage.navigateHomePage();
         await this.homePage.verifyHomePage();
-        await this.homePage.addToCart("prod-006"); 
+        await this.homePage.addToCart(PRODUCT_IDS.PRODUCT_006); 
     }
 
     async addMultipleProductsToCart(): Promise<void>{
         await this.homePage.navigateHomePage();
         await this.homePage.verifyHomePage();
-        await this.homePage.addToCart('prod-001'); 
-        await this.homePage.addToCart('prod-006'); 
-        await this.homePage.addToCart('prod-005'); 
+        await this.homePage.addToCart(PRODUCT_IDS.PRODUCT_001);
+        await this.homePage.addToCart(PRODUCT_IDS.PRODUCT_006);
+        await this.homePage.addToCart(PRODUCT_IDS.PRODUCT_005); 
         await this.homePage.verifyCartUpdate();
     }
 
@@ -37,26 +38,26 @@ export class OrderFlow {
         await this.homePage.clickCart();
         await this.cartPage.verifyCartPage();
         
-        await this.cartPage.verifyProductInCart("prod-001");
-        await this.cartPage.verifyProductInCart("prod-006");
-        await this.cartPage.verifyProductInCart("prod-005");
+        await this.cartPage.verifyProductInCart(PRODUCT_IDS.PRODUCT_001);
+        await this.cartPage.verifyProductInCart(PRODUCT_IDS.PRODUCT_006);
+        await this.cartPage.verifyProductInCart(PRODUCT_IDS.PRODUCT_005);
         
-        await this.cartPage.removeProductById("prod-001");
-        await this.cartPage.verifyProductNotInCart("prod-001");
+        await this.cartPage.removeProductById(PRODUCT_IDS.PRODUCT_001);
+        await this.cartPage.verifyProductNotInCart(PRODUCT_IDS.PRODUCT_001);
         
         const subtotalAfterFirstRemoval = await this.cartPage.getSubtotalValue();
         console.log("Subtotal after removing first product: " + subtotalAfterFirstRemoval);
         
-        await this.cartPage.removeProductById("prod-006");
-        await this.cartPage.verifyProductNotInCart("prod-006");
+        await this.cartPage.removeProductById(PRODUCT_IDS.PRODUCT_006);
+        await this.cartPage.verifyProductNotInCart(PRODUCT_IDS.PRODUCT_006);
         
-        await this.cartPage.verifyProductInCart("prod-005");
+        await this.cartPage.verifyProductInCart(PRODUCT_IDS.PRODUCT_005);
         
         const subtotalAfterSecondRemoval = await this.cartPage.getSubtotalValue();
         console.log("Subtotal after removing second product: " + subtotalAfterSecondRemoval);
         
-        await this.cartPage.removeProductById("prod-005");
-        await this.cartPage.verifyProductNotInCart("prod-005");
+        await this.cartPage.removeProductById(PRODUCT_IDS.PRODUCT_005);
+        await this.cartPage.verifyProductNotInCart(PRODUCT_IDS.PRODUCT_005);
         
         await this.cartPage.verifyEmptyCart();
     }
@@ -70,14 +71,14 @@ export class OrderFlow {
     async fillCheckoutDetails(): Promise<void>{
         await this.checkoutPage.verifyCheckoutPage();
         await this.checkoutPage.switchGuest();
-        await this.checkoutPage.fillContactInformation("Chaithra Chandran", "chaithra@ust.com", "7890564567");
-        await this.checkoutPage.fillShippingAddress("West coast", "Chennai", "IN", "60002", "India");
+        await this.checkoutPage.fillContactInformation(TEST_DATA.VALID_USER.name, TEST_DATA.VALID_USER.email, TEST_DATA.VALID_USER.phone);
+        await this.checkoutPage.fillShippingAddress(TEST_DATA.SHIPPING_ADDRESS.street, TEST_DATA.SHIPPING_ADDRESS.city, TEST_DATA.SHIPPING_ADDRESS.state, TEST_DATA.SHIPPING_ADDRESS.zipCode, TEST_DATA.SHIPPING_ADDRESS.country);
         await this.checkoutPage.clickPayment();
     }
 
-    async fillPaymentDetails(name:string, cardNumber:string,expiry:string, cvv:string): Promise<void>{
+    async fillPaymentDetails(): Promise<void>{
         await this.paymentPage.verifyCheckoutPage();
-        await this.paymentPage.fillCardInformation(name, cardNumber,expiry, cvv);
+        await this.paymentPage.fillCardInformation(TEST_DATA.PAYMENT_CARD.cardholderName, TEST_DATA.PAYMENT_CARD.cardNumber, TEST_DATA.PAYMENT_CARD.expiryDate, TEST_DATA.PAYMENT_CARD.cvv);
         await this.paymentPage.clickPlaceOrder();
         await this.paymentPage.assertDecline();
     }
