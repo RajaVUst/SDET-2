@@ -53,7 +53,7 @@ jobs:
         if: always()
         working-directory: Testing_Assessment/playwright
         run: |
-          echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Playwright tests completed" >> $GITHUB_STEP_SUMMARY
           echo "Reports available in artifacts" >> $GITHUB_STEP_SUMMARY
@@ -79,5 +79,5 @@ jobs:
         working-directory: Testing_Assessment/restAssured
         run: mvn --batch-mode test
         env:
-          BOOKSTORE_BASE_URL: ${{ secrets.CHAITHRA_BACKEND_BASE_URL }}
+          BOOKSTORE_BASE_URL: https://demoqa.com
           PASSWORD: ${{ secrets.CHAITHRA_BACKEND_PASSWORD }}
