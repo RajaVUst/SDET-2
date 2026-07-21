@@ -99,7 +99,7 @@ jobs:
       - name: Run Maven Tests
         working-directory: FinalCapstoneApi
         env:
-          BASE_URL: ${{ vars.BASE_API_URL || 'https://demoqa.com' }}
+          BASE_URL: ${{ secrets.KARTHIKEYAN_API_BASE_URL || 'https://demoqa.com' }}
         run: mvn clean test
 
       - name: Generate Allure Report
