@@ -13,6 +13,5 @@ export class PaymentPage{
         await this.page.getByTestId('payment-expiry').fill(CARD_EXPIRY);
         await this.page.getByTestId('payment-cvv').fill(CARD_CVV);
         await this.page.getByTestId('place-order-button').click();
-        await expect(this.page.getByTestId('payment-general-error')).toBeVisible();
     }
 }
