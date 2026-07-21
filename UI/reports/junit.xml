@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="9.932674">
-<testsuite name="PurchaseFlow.spec.ts" timestamp="2026-07-21T07:11:35.987Z" hostname="chromium" tests="1" failures="0" skipped="0" time="6.917" errors="0">
-<testcase name="RetailMart Purchase Flow" classname="PurchaseFlow.spec.ts" time="6.917">
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="12.73934">
+<testsuite name="PurchaseFlow.spec.ts" timestamp="2026-07-21T10:36:04.537Z" hostname="chromium" tests="1" failures="0" skipped="0" time="8.178" errors="0">
+<testcase name="RetailMart Purchase Flow" classname="PurchaseFlow.spec.ts" time="8.178">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|..\test-results\PurchaseFlow-RetailMart-Purchase-Flow-chromium\test-finished-1.png]]
