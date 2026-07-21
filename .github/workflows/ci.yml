@@ -1,0 +1,50 @@
+name: Capstone Test Pipeline
+
+on:
+  push:
+
+jobs:
+
+  ui-tests:
+    name: UI Tests - Playwright
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ui-testing
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Create .env
+        run: |
+          cat <<EOF > .env
+          BASE_URL=${{ secrets.BASE_URL }}
+          ALICE_CARD_NUMBER=${{ secrets.ALICE_CARD_NUMBER }}
+          ALICE_CARD_EXPIRY=${{ secrets.ALICE_CARD_EXPIRY }}
+          ALICE_CARD_CVV=${{ secrets.ALICE_CARD_CVV }}
+          EOF
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright Tests
+        run: npx playwright test ./addToCart.ts
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            ui-testing/playwright-report
+            ui-testing/test-results
