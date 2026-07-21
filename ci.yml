@@ -1,0 +1,93 @@
+name: Playwright Tests CI
+
+on:
+  push:
+    branches: [main, develop, Chaithra_final_assessment]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: 'SDET-1/playwright/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: SDET-1/playwright
+        run: npm ci
+      
+      - name: Install Playwright browsers
+        working-directory: SDET-1/playwright
+        run: npx playwright install --with-deps
+      
+      - name: Run Playwright tests
+        working-directory: SDET-1/playwright
+        run: npm test
+        env:
+          CI: true
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-node-${{ matrix.node-version }}
+          path: SDET-1/playwright/playwright-report/
+          retention-days: 30
+      
+      - name: Upload test videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-videos-node-${{ matrix.node-version }}
+          path: SDET-1/playwright/test-results/
+          retention-days: 7
+      
+      - name: Publish test results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: SDET-1/playwright/test-results/**/*.json
+          check_name: Playwright Test Results
+          comment_mode: always
+
+  allure-report:
+    name: Allure Report
+    runs-on: ubuntu-latest
+    if: always()
+    needs: test
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          path: allure-results
+      
+      - name: Publish Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+      
+      - name: Deploy report to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report

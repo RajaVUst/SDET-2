@@ -3,7 +3,6 @@ import crypto from "node:crypto";
 import { OrderFlow } from "../flows/OrderFlow";
 import { logger, type AppLogger, redactForLog } from "../utils/logger";
 import { getMaskedLocators } from "../utils/mask";
-import "../config/constants"
 
 type DiagnosticFixtures = {
     correlationId: string;
@@ -26,7 +25,7 @@ export const test = base.extend<DiagnosticFixtures>({
         const baseMeta = {
             correlationId,
             project: testInfo.project.name,
-            service: "tripstack-playwright",
+            service: "retailmart",
             specFile: testInfo.file,
             testName: testInfo.title,
             workerIndex: testInfo.workerIndex

@@ -15,7 +15,7 @@ export class HomePage {
 
 
     private addCart(productName: string): Locator {
-        return this.page.locator(`//div[@data-testid*='product-card']//a[contains(text(), '${productName}')]/ancestor::div[@data-testid*='product-card']//button[contains(@data-testid, 'add-to-cart')]`);
+        return this.page.locator(`//div[@data-testid*="product-card"]//a[contains(text(), "${productName}")]/ancestor::div[@data-testid*="product-card"]//button[contains(@data-testid, "add-to-cart")]`);
     }
 
     private addCartByProductId(productId: string): Locator {
@@ -41,15 +41,12 @@ export class HomePage {
     }
 
     async addToCart(productIdentifier: string): Promise<void> {
-        // Method: Add by product ID (recommended approach)
         if (productIdentifier?.startsWith('prod-')) {
             await this.addCartByProductId(productIdentifier).click();
         }
-        // Fallback: Add by product name if not a product ID
         else if (productIdentifier) {
             await this.addCart(productIdentifier).click();
         }
-        // Default: Add first product
         else {
             await this.addCartByProductId('prod-001').click();
         }

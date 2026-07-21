@@ -67,5 +67,3 @@ export default defineConfig({
 });
 
 
-// npx allure generate allure-results --clean
-// npx allure open allure-report
