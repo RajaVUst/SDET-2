@@ -1,6 +1,8 @@
+import { Secrets } from "../secrets/Secrets";
+
 export const PaymentData = {
-    CARD_NAME: "Jane",
-    CARD_NUMBER: "4485341305987173",
-    EXPIRY: "12/30",
-    CVV: "123"
+    CARD_NAME: Secrets.CARD_NAME,
+    CARD_NUMBER: Secrets.CARD_NUMBER,
+    EXPIRY: Secrets.CARD_EXPIRY,
+    CVV: Secrets.CARD_CVV
 };

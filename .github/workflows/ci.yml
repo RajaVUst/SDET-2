@@ -44,7 +44,11 @@ jobs:
 
       - name: Run Playwright Tests
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ secrets.KARTHIKEYAN_BASE_URL }}
+          CARD_NAME: ${{ secrets.KARTHIKEYAN_CARD_NAME }}
+          CARD_NUMBER: ${{ secrets.KARTHIKEYAN_CARD_NUMBER }}
+          CARD_EXPIRY: ${{ secrets.KARTHIKEYAN_CARD_EXPIRY }}
+          CARD_CVV: ${{ secrets.KARTHIKEYAN_CARD_CVV }}
           HEADLESS: true
         working-directory: UI
         run: npx playwright test
