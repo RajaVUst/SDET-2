@@ -75,7 +75,7 @@ export default defineConfig({
         // Application
         //--------------------------------------------
 
-        baseURL: process.env.BASE_URL,
+        baseURL: process.env.BASE_URL || "https://www.retailmart.linkpc.net",
 
         //--------------------------------------------
         // Browser
