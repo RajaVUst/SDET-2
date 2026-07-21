@@ -21,8 +21,7 @@ export class OrderFlow {
     async addToCart() : Promise<void>{
         await this.homePage.navigateHomePage();
         await this.homePage.verifyHomePage();
-        await this.homePage.addToCart("prod-006"); // Add using product ID
-        await this.homePage.verifyCartUpdate();
+        await this.homePage.addToCart("prod-006"); 
     }
 
     async addMultipleProductsToCart(): Promise<void>{

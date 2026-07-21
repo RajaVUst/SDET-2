@@ -58,6 +58,6 @@ jobs:
         run: |
           echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Playwright tests completed" >> $GITHUB_STEP_SUMMARY
-          echo "📊 Reports available in artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "Playwright tests completed" >> $GITHUB_STEP_SUMMARY
+          echo "Reports available in artifacts" >> $GITHUB_STEP_SUMMARY
 
