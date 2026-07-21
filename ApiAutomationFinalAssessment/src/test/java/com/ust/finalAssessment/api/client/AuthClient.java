@@ -3,6 +3,7 @@ package com.ust.finalAssessment.api.client;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.Objects;
 
 import static com.ust.finalAssessment.factory.RequestSpecFactory.*;
 
@@ -15,8 +16,8 @@ public class AuthClient {
         return given()
                 .spec(authRequest)
                 .body(Map.of(
-                        "userName", username,
-                        "password", password
+                        "userName", Objects.requireNonNull(username, "username must not be null"),
+                        "password", Objects.requireNonNull(password, "password must not be null")
                 ))
                 .when()
                 .post("/User");
@@ -29,8 +30,8 @@ public class AuthClient {
         return given()
                 .spec(authRequest)
                 .body(Map.of(
-                        "userName", email,
-                        "password", password
+                        "userName", Objects.requireNonNull(email, "email must not be null"),
+                        "password", Objects.requireNonNull(password, "password must not be null")
                 ))
                 .when()
                 .post("/GenerateToken");

@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.Objects;
+
 import static com.ust.finalAssessment.factory.ResponseSpecFactory.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,13 +23,23 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(ExtentTestListener.class)
 public class DemoQATest {
-    static Dotenv dotenv =Dotenv.load();
-    AuthClient authClient =new AuthClient();
+    static Dotenv dotenv = Dotenv.configure()
+            .ignoreIfMissing()
+            .load();
+    AuthClient authClient = new AuthClient();
     BookClient bookClient = new BookClient();
-    private final String username = dotenv.get("USER_NAME");
-    private final String password = dotenv.get("USER_PASSWORD");
-    private static String token ;
-    private String id = (Double.toString(Math.random()*1000001));
+    private final String username = getRequired("USER_NAME");
+    private final String password = getRequired("USER_PASSWORD");
+    private static String token;
+    private String id = Double.toString(Math.random() * 1000001);
+
+    private static String getRequired(String key) {
+        String value = dotenv.get(key);
+        if (value == null) {
+            value = System.getenv(key);
+        }
+        return Objects.requireNonNull(value, "Missing required environment variable: " + key);
+    }
 
     @Test
     @Order(0)
