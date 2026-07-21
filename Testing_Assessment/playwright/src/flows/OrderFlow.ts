@@ -4,7 +4,7 @@ import { CartPage } from "../pages/CartPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { PaymentPage } from "../pages/PaymentPage";
 import { AppLogger } from "../utils/logger";
-import { TEST_DATA, PRODUCT_IDS } from "../config/constants";
+import { TEST_DATA, PRODUCT_IDS, PAYMENT_SECRETS } from "../config/constants";
 
 export class OrderFlow {
     private readonly homePage: HomePage;
@@ -78,7 +78,7 @@ export class OrderFlow {
 
     async fillPaymentDetails(): Promise<void>{
         await this.paymentPage.verifyCheckoutPage();
-        await this.paymentPage.fillCardInformation(TEST_DATA.PAYMENT_CARD.cardholderName, TEST_DATA.PAYMENT_CARD.cardNumber, TEST_DATA.PAYMENT_CARD.expiryDate, TEST_DATA.PAYMENT_CARD.cvv);
+        await this.paymentPage.fillCardInformation(PAYMENT_SECRETS.cardholderName, PAYMENT_SECRETS.cardNumber, PAYMENT_SECRETS.expiryDate, PAYMENT_SECRETS.cvv);
         await this.paymentPage.clickPlaceOrder();
         await this.paymentPage.assertDecline();
     }

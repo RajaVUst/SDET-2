@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Automation Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main, develop]
 
 jobs:
-  test:
+  playwright:
     name: Run Playwright Tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
@@ -21,43 +21,63 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: 'SDET-1/playwright/package-lock.json'
+          cache-dependency-path: 'Testing_Assessment/playwright/package-lock.json'
       
       - name: Install dependencies
-        working-directory: SDET-1/playwright
+        working-directory: Testing_Assessment/playwright
         run: npm ci
       
       - name: Install Playwright browsers
-        working-directory: SDET-1/playwright
+        working-directory: Testing_Assessment/playwright
         run: npx playwright install --with-deps
       
       - name: Run Playwright tests
-        working-directory: SDET-1/playwright
+        working-directory: Testing_Assessment/playwright
         run: npm test
         continue-on-error: true
-      
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-test-results
-          path: SDET-1/playwright/test-results/
-          retention-days: 30
+        env:
+          BASE_URL: ${{ secrets.CHAITHRA_BASE_URL }}
+          CARD_NUMBER: ${{ secrets.CHAITHRA_CARD_NUMBER }}
+          CARD_EXPIRY: ${{ secrets.CHAITHRA_CARD_EXPIRY }}
+          CARD_CVV: ${{ secrets.CHAITHRA_CARD_CVV }}
       
       - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report
-          path: SDET-1/playwright/playwright-report/
+          path: Testing_Assessment/playwright/playwright-report/
           retention-days: 30
       
       - name: Test Report Summary
         if: always()
-        working-directory: SDET-1/playwright
+        working-directory: Testing_Assessment/playwright
         run: |
           echo "## Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Playwright tests completed" >> $GITHUB_STEP_SUMMARY
           echo "Reports available in artifacts" >> $GITHUB_STEP_SUMMARY
 
+  restassured:
+    name: Run RestAssured Tests
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '22'
+          cache: maven
+          cache-dependency-path: Testing_Assessment/restAssured/pom.xml
+
+      - name: Run RestAssured tests
+        working-directory: Testing_Assessment/restAssured
+        run: mvn --batch-mode test
+        env:
+          BOOKSTORE_BASE_URL: ${{ secrets.CHAITHRA_BACKEND_BASE_URL }}
+          PASSWORD: ${{ secrets.CHAITHRA_BACKEND_PASSWORD }}

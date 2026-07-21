@@ -1,5 +1,6 @@
 import { Page , Locator} from "@playwright/test";
 import { expect } from "../fixtures/test.fixture";
+import { APP_CONSTANTS } from "../config/constants";
 
 export class HomePage {
 
@@ -31,7 +32,7 @@ export class HomePage {
     }
 
     async navigateHomePage(): Promise<void>{
-        await this.page.goto("https://chess-agent-83252463.figma.site/");
+        await this.page.goto(APP_CONSTANTS.BASE_URL);
         await this.page.waitForLoadState();
     }
 
