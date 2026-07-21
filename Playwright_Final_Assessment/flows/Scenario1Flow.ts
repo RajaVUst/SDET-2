@@ -17,7 +17,7 @@ export class Scenario1
     async search(query:string)
     {
         await this.homepage.Home()
-        await expect((this.page)).toHaveURL(/chess-agent-83252463.figma.site/)
+        await expect((this.page)).toHaveURL("/")
         await expect(this.page.getByRole('heading',{name:/RetailMart/,level:1}))
         await expect(this.page.getByRole('button',{name:/Search/})).toBeVisible()
 
