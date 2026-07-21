@@ -1,6 +1,7 @@
 package com.ust.finalAssessment.tests;
 import com.ust.finalAssessment.api.client.AuthClient;
 import com.ust.finalAssessment.api.client.BookClient;
+import com.ust.finalAssessment.model.Book;
 import com.ust.finalAssessment.report.ExtentTestListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.qameta.allure.*;
@@ -9,6 +10,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
 import java.util.Objects;
 
 import static com.ust.finalAssessment.factory.ResponseSpecFactory.*;
@@ -96,8 +98,21 @@ public class DemoQATest {
 
         JsonPath jsonPath= response.jsonPath();
 
-        var list = jsonPath.getList("books");
+        List<Book> list = jsonPath.getList("books", Book.class);
 
         assertThat(list.size(),greaterThanOrEqualTo(0));
+
+        for (Book book : list) {
+            System.out.println("---------------------------------------------");
+            System.out.println("Isbn "+book.isbn());
+            System.out.println("Title "+book.title());
+            System.out.println("Subtitle "+book.subTitle());
+            System.out.println("Author "+book.publish_date());
+            System.out.println("Publisher "+ book.publisher());
+            System.out.println("Pages "+book.pages());
+            System.out.println("Description "+book.description());
+            System.out.println("website "+book.website());
+            System.out.println("---------------------------------------------");
+        }
     }
 }
