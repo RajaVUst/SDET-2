@@ -31,6 +31,14 @@ jobs:
           distribution: temurin
           java-version: 22
 
+      - name: Create API .env File
+        run: |
+          cat > .env << EOF
+          BASE_URL=${{ secrets.BASE_URL }}
+          USERNAME=${{ secrets.USERNAME }}
+          PASSWORD=${{ secrets.PASSWORD }}
+          EOF
+
       - name: Cache Maven Dependencies
         uses: actions/cache@v4
         with:
@@ -74,6 +82,18 @@ jobs:
         with:
           node-version: 20
 
+      - name: Create UI .env File
+        run: |
+          cat > .env << EOF
+          BASEURL=${{ secrets.BASE_URL }}
+          NAME=${{ secrets.NAME }}
+          EMAIL=${{ secrets.EMAIL }}
+          PHONE=${{ secrets.PHONE }}
+          CARD=${{ secrets.CARD }}
+          EXPIRY=${{ secrets.EXPIRY }}
+          CVV=${{ secrets.CVV }}
+          EOF
+
       - name: Install Dependencies
         run: npm ci
 
@@ -81,14 +101,6 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
-        env:
-          BASEURL: ${{ secrets.BASE_URL }}
-          NAME: ${{ secrets.NAME }}
-          EMAIL: ${{ secrets.EMAIL }}
-          PHONE: ${{ secrets.PHONE }}
-          CARD: ${{ secrets.CARD }}
-          EXPIRY: ${{ secrets.EXPIRY }}
-          CVV: ${{ secrets.CVV }}
         run: npx playwright test
 
       - name: Upload Playwright Report
