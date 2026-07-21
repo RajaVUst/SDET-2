@@ -1,0 +1,3 @@
+[INFO - 13:12:05] Test Started {null
+[INFO - 13:12:08] Login for the Tripstack {[object Object]
+[INFO - 13:12:08] Test passed {null

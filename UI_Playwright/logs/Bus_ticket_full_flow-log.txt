@@ -1,0 +1,4 @@
+[INFO - 08:33:31] Test Started {null
+[INFO - 08:33:33] Login for the Tripstack {[object Object]
+[INFO - 08:33:34] Search for the bus in Tripstack {null
+[INFO - 08:33:34] Test passed {null
