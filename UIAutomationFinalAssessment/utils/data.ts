@@ -1,7 +1,7 @@
 export const details = {
 street :"Rajasan",
-state :"Kerala",
+state :"AL",
 zip :"11111",
 country :"India",
-city :"AL"
+city :"TVM"
 }

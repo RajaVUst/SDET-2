@@ -87,6 +87,11 @@ export class ErrorFlow {
     {
         await this.pay.visiblePaymentHeading();
     }
+
+     async fillpaymentDetails()
+    {
+        await this.pay.fillpaymentDetails();
+    }
     async showErrorwhilePlacing()
     {
         await this.pay.showErrorwhilePlacing();
@@ -103,8 +108,7 @@ export class ErrorFlow {
    await this.visibleCheckoutHeading();
    await this.fillContactAndContinue();
    await this.visiblePaymentHeading();
+   await this.fillpaymentDetails();
    await this.showErrorwhilePlacing();
-
-
 }
 }
