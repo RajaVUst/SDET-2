@@ -26,9 +26,9 @@ jobs:
         run: |
           cat <<EOF > .env
           BASE_URL=${{ secrets.BASE_URL }}
-          ALICE_CARD_NUMBER=${{ secrets.ALICE_CARD_NUMBER }}
-          ALICE_CARD_EXPIRY=${{ secrets.ALICE_CARD_EXPIRY }}
-          ALICE_CARD_CVV=${{ secrets.ALICE_CARD_CVV }}
+          ALICE_CARD_NUMBER=${{ secrets.AKHIL_ALICE_CARD_NUMBER }}
+          ALICE_CARD_EXPIRY=${{ secrets.AKHIL_ALICE_CARD_EXPIRY }}
+          ALICE_CARD_CVV=${{ secrets.AKHIL_ALICE_CARD_CVV }}
           EOF
 
       - name: Install Dependencies
@@ -38,7 +38,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright Tests
-        run: npx playwright test ./addToCart.ts
+        run: npx playwright test ./addToCart
 
       - name: Upload Playwright Report
         if: always()
