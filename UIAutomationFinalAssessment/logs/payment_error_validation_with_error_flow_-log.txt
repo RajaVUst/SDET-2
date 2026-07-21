@@ -1,24 +1,24 @@
-1. [14:00:20] INFO Test Started
-2. [14:00:20] INFO Step: home page 
-3. [14:00:20] INFO Navigating to https://chess-agent-83252463.figma.site/
-4. [14:00:21] INFO Screenshot captured: home-page-loaded
-5. [14:00:21] INFO Step: cloth category 
-6. [14:00:21] INFO step: product page open
-7. [14:00:21] INFO Screenshot captured: product-page-loaded
-8. [14:00:21] INFO step: add to cart
-9. [14:00:21] INFO step: go to cart
-10. [14:00:21] INFO Screenshot captured: product-page-loaded
-11. [14:00:21] INFO step: tax validation in cart part
-12. [14:00:22] INFO Filling: enter name = "Shah"
-13. [14:00:22] INFO Filling: enter email = "****************"
-14. [14:00:22] INFO Filling: enter phone number = "**********"
-15. [14:00:22] INFO Filling: enter  street = "Rajasan"
-16. [14:00:22] INFO Filling: enter city  = "TVM"
-17. [14:00:22] INFO Selecting: select state = "AL"
-18. [14:00:22] INFO Filling: enter zip  = "11111"
-19. [14:00:22] INFO Filling: enter country  = "India"
-20. [14:00:22] INFO Filling: enter name = "****"
-21. [14:00:22] INFO Filling: enter card number = "****************"
-22. [14:00:22] INFO Filling: enter phone cvv = "*****"
-23. [14:00:23] INFO Filling: enter  cvv = "***"
-24. [14:00:23] INFO Test passed
+1. [17:25:02] INFO Test Started
+2. [17:25:02] INFO Step: home page 
+3. [17:25:02] INFO Navigating to https://chess-agent-83252463.figma.site/
+4. [17:25:04] INFO Screenshot captured: home-page-loaded
+5. [17:25:04] INFO Step: cloth category 
+6. [17:25:04] INFO step: product page open
+7. [17:25:04] INFO Screenshot captured: product-page-loaded
+8. [17:25:04] INFO step: add to cart
+9. [17:25:04] INFO step: go to cart
+10. [17:25:04] INFO Screenshot captured: product-page-loaded
+11. [17:25:04] INFO step: tax validation in cart part
+12. [17:25:05] INFO Filling: enter name = "Shah"
+13. [17:25:05] INFO Filling: enter email = "****************"
+14. [17:25:05] INFO Filling: enter phone number = "**********"
+15. [17:25:05] INFO Filling: enter  street = "Rajasan"
+16. [17:25:05] INFO Filling: enter city  = "TVM"
+17. [17:25:05] INFO Selecting: select state = "AL"
+18. [17:25:05] INFO Filling: enter zip  = "11111"
+19. [17:25:05] INFO Filling: enter country  = "India"
+20. [17:25:05] INFO Filling: enter name = "****"
+21. [17:25:05] INFO Filling: enter card number = "****************"
+22. [17:25:05] INFO Filling: enter phone cvv = "*****"
+23. [17:25:05] INFO Filling: enter  cvv = "***"
+24. [17:25:05] INFO Test passed
