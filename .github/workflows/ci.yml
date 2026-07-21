@@ -34,12 +34,12 @@ jobs:
       - name: Run Playwright tests
         working-directory: Testing_Assessment/playwright
         run: npm test
-        continue-on-error: true
         env:
           BASE_URL: ${{ secrets.CHAITHRA_BASE_URL }}
           CARD_NUMBER: ${{ secrets.CHAITHRA_CARD_NUMBER }}
           CARD_EXPIRY: ${{ secrets.CHAITHRA_CARD_EXPIRY }}
           CARD_CVV: ${{ secrets.CHAITHRA_CARD_CVV }}
+          HEADLESS: "true"
       
       - name: Upload HTML report
         if: always()
