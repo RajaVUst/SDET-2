@@ -1,0 +1,44 @@
+{
+  "name": "finalcapstoneui",
+  "version": "1.0.0",
+  "description": "RetailMart Playwright Automation Framework",
+  "author": "Karthikeyan S",
+  "license": "ISC",
+  "type": "commonjs",
+
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:chrome": "playwright test --project=chromium",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen",
+    "trace": "playwright show-trace",
+    "install:browsers": "playwright install",
+    "clean": "npx rimraf reports playwright-report test-results",
+    "ci": "playwright test"
+  },
+
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "testing",
+    "ui-testing",
+    "capstone"
+  ],
+
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
+    "typescript": "^5.9.2",
+    "ts-node": "^10.9.2",
+    "rimraf": "^6.0.1"
+  },
+
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "winston": "^3.19.0"
+  }
+}
