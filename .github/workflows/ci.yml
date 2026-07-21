@@ -32,17 +32,21 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: UI/package-lock.json
 
       - name: Install Dependencies
+        working-directory: UI
         run: npm ci
 
       - name: Install Playwright Browsers
+        working-directory: UI
         run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           HEADLESS: true
+        working-directory: UI
         run: npx playwright test
 
       - name: Upload Playwright Report
@@ -50,21 +54,21 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: playwright-report/
+          path: UI/playwright-report/
 
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: test-results/
+          path: UI/test-results/
 
       - name: Upload Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: reports
-          path: reports/
+          path: UI/reports/
 
   api-tests:
 
@@ -85,19 +89,19 @@ jobs:
           cache: maven
 
       - name: Create .env
-        working-directory: api_restassured
+        working-directory: FinalCapstoneApi
         run: |
           echo "BASE_URL=${{ vars.BASE_API_URL }}" > .env
 
       - name: Run Maven Tests
-        working-directory: api_restassured
+        working-directory: FinalCapstoneApi
         run: mvn clean test
 
       - name: Generate Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master
         with:
-          allure_results: api_restassured/allure-results
+          allure_results: FinalCapstoneApi/allure-results
           allure_report: allure-report
 
       - name: Upload Surefire Reports
@@ -105,21 +109,21 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
-          path: api_restassured/target/surefire-reports/
+          path: FinalCapstoneApi/target/surefire-reports/
 
       - name: Upload TestNG Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: testng-report
-          path: api_restassured/test-output/
+          path: FinalCapstoneApi/test-output/
 
       - name: Upload Allure Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: api_restassured/allure-results/
+          path: FinalCapstoneApi/allure-results/
 
       - name: Upload Allure Report
         if: always()
