@@ -10,7 +10,6 @@ on:
       - Athuldev_FinalAssessment
 
 jobs:
-  
 
   ui-tests:
     name: Playwright UI Tests
@@ -53,3 +52,32 @@ jobs:
         with:
           name: playwright-test-results
           path: UI_Playwright/test-results
+
+  api-tests:
+    name: API Automation Tests
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Api_RestAssure
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 22
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '22'
+          cache: maven
+
+      - name: Run API Tests
+        run: mvn clean test
+
+      - name: Upload API Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-results
+          path: Api_RestAssure/target

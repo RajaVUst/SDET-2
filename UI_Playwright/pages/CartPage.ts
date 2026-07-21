@@ -12,7 +12,7 @@ export class CartPage
     
     async checkout()
     {
-        this.checkoutButton().click();
+        await this.checkoutButton().click();
 
     }
     async checkOrderSummaryVisible()

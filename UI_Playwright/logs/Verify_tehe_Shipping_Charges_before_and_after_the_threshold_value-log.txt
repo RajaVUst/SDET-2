@@ -1,2 +1,2 @@
-[INFO - 13:29:34] Test Started {null
-[INFO - 13:29:37] Test failed {null
+[INFO - 14:18:35] Test Started {null
+[INFO - 14:18:38] Test passed {null
