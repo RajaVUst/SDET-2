@@ -1,4 +1,4 @@
-name: Playwright CI
+name: Final Assessment CI
 
 on:
   workflow_dispatch:
@@ -12,6 +12,51 @@ on:
   pull_request:
 
 jobs:
+
+  api-tests:
+    name: API Automation
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./API_FINAL_ASSESSMENT
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 22
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ runner.os }}-${{ hashFiles('API_FINAL_ASSESSMENT/pom.xml') }}
+
+      - name: Build Project
+        run: mvn clean compile
+
+      - name: Run API Tests
+        run: mvn test
+
+      - name: Upload API Target
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-target
+          path: API_FINAL_ASSESSMENT/target
+
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: API_FINAL_ASSESSMENT/allure-results
+
   ui-tests:
     name: Playwright UI Automation
     runs-on: ubuntu-latest
@@ -53,11 +98,11 @@ jobs:
           name: playwright-report
           path: Playwright_Final_Assessment/playwright-report
 
-      - name: Upload Test Results
+      - name: Upload Playwright Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: playwright-results
           path: Playwright_Final_Assessment/test-results
 
   publish-reports:
@@ -65,10 +110,11 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
+      - api-tests
       - ui-tests
 
     steps:
-      - name: Download Reports
+      - name: Download All Artifacts
         uses: actions/download-artifact@v4
 
       - name: Upload Final Artifacts

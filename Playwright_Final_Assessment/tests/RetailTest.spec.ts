@@ -52,10 +52,3 @@ test.describe("RETAIL MART", ()=>{
        
 
 
-
-
-
-//assertion
-//log
-//testData
-//CI/CD

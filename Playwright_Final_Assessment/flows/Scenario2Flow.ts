@@ -76,6 +76,7 @@ export class Scenario2
         await expect(this.page.locator("[data-testid='payment-general-error']")).toHaveText(/Payment processing error/)
         await this.page.getByRole('button',{name:/Place Order/}).click()
         await expect(this.page.locator("[data-testid='payment-general-error']")).toHaveText(/Payment processing error/)
+         await expect((this.page)).toHaveURL(/payment/)
 
 
     }   
