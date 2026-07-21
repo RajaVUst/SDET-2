@@ -1,0 +1,69 @@
+import { Page , Locator} from "@playwright/test";
+import { expect } from "../fixtures/test.fixture";
+
+export class HomePage {
+
+    constructor(private readonly page: Page) {}
+
+    private shopNowButton(): Locator {
+        return this.page.getByRole("link", {name:"Shop Now"});
+    }
+
+    private shopBanner(): Locator{
+        return this.page.getByRole("heading", {name: "Shop Everything at RetailMart"});
+    }
+
+
+    private addCart(productName: string): Locator {
+        return this.page.locator(`//div[@data-testid*='product-card']//a[contains(text(), '${productName}')]/ancestor::div[@data-testid*='product-card']//button[contains(@data-testid, 'add-to-cart')]`);
+    }
+
+    private addCartByProductId(productId: string): Locator {
+        return this.page.getByTestId(`add-to-cart-${productId}`);
+    }
+
+    private cartButton(): Locator{
+        return this.page.getByTestId("cart-link");
+    }
+
+    private cartCount(): Locator{
+        return this.page.getByTestId("cart-count");
+    }
+
+    async navigateHomePage(): Promise<void>{
+        await this.page.goto("https://chess-agent-83252463.figma.site/");
+        await this.page.waitForLoadState();
+    }
+
+    async verifyHomePage(): Promise<void>{
+        await expect(this.shopBanner()).toBeVisible();
+        await expect(this.shopNowButton()).toBeVisible();
+    }
+
+    async addToCart(productIdentifier: string): Promise<void> {
+        // Method: Add by product ID (recommended approach)
+        if (productIdentifier?.startsWith('prod-')) {
+            await this.addCartByProductId(productIdentifier).click();
+        }
+        // Fallback: Add by product name if not a product ID
+        else if (productIdentifier) {
+            await this.addCart(productIdentifier).click();
+        }
+        // Default: Add first product
+        else {
+            await this.addCartByProductId('prod-001').click();
+        }
+    }
+
+    async verifyCartUpdate(): Promise<void>{
+        await expect(this.cartButton()).toBeVisible();
+        await expect(this.cartCount()).toBeVisible();
+    }
+
+    async clickCart(): Promise<void>{
+        await this.cartButton().click();
+    }
+}
+
+
+
