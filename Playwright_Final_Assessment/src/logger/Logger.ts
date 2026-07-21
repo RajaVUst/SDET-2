@@ -48,7 +48,7 @@ export const logger = winston.createLogger({
     level: process.env.LOG_LEVEL ?? "info",
     format: combine(redactSensitiveFields(),timestamp(),errors({stack:true}),json()),
     defaultMeta:{
-        service: "shopkart"
+        service: "RETAIL MART"
     },
    transports: [
         new winston.transports.Console({
