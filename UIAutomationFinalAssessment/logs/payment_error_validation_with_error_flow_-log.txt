@@ -1,18 +1,18 @@
-1. [13:09:47] INFO Test Started
-2. [13:09:47] INFO Step: home page 
-3. [13:09:47] INFO Navigating to https://chess-agent-83252463.figma.site/
-4. [13:09:48] INFO Screenshot captured: home-page-loaded
-5. [13:09:48] INFO Step: cloth category 
-6. [13:09:48] INFO step: product page open
-7. [13:09:48] INFO Screenshot captured: product-page-loaded
-8. [13:09:48] INFO step: add to cart
-9. [13:09:48] INFO step: go to cart
-10. [13:09:49] INFO Screenshot captured: product-page-loaded
-11. [13:09:49] INFO step: tax validation in cart part
-12. [13:09:49] INFO Filling: enter name = "Shah"
-13. [13:09:49] INFO Filling: enter email = "****************"
-14. [13:09:49] INFO Filling: enter phone number = "*********"
-15. [13:09:49] INFO Filling: enter  street = "Rajasan"
-16. [13:09:49] INFO Filling: enter city  = "AL"
-17. [13:09:49] INFO Selecting: select state = "Kerala"
-18. [13:10:19] INFO Test failed
+1. [13:12:13] INFO Test Started
+2. [13:12:13] INFO Step: home page 
+3. [13:12:13] INFO Navigating to https://chess-agent-83252463.figma.site/
+4. [13:12:14] INFO Screenshot captured: home-page-loaded
+5. [13:12:14] INFO Step: cloth category 
+6. [13:12:14] INFO step: product page open
+7. [13:12:15] INFO Screenshot captured: product-page-loaded
+8. [13:12:15] INFO step: add to cart
+9. [13:12:15] INFO step: go to cart
+10. [13:12:15] INFO Screenshot captured: product-page-loaded
+11. [13:12:15] INFO step: tax validation in cart part
+12. [13:12:15] INFO Filling: enter name = "Shah"
+13. [13:12:15] INFO Filling: enter email = "****************"
+14. [13:12:15] INFO Filling: enter phone number = "*********"
+15. [13:12:15] INFO Filling: enter  street = "Rajasan"
+16. [13:12:15] INFO Filling: enter city  = "AL"
+17. [13:12:15] INFO Selecting: select state = "Kerala"
+18. [13:12:46] INFO Test failed
